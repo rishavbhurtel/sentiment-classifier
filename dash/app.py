@@ -17,7 +17,7 @@ external_stylesheets = [
     'https://fonts.googleapis.com/css?family=Roboto&display=swap'
 ]
 
-external_scripts = "https://raw.githubusercontent.com/MarwanDebbiche/post-tuto-deployment/master/src/dash/assets/gtag.js"
+external_scripts = "/home/rishav/Documents/sentiment-classifier/dash/assets/gtag.js"
 
 app = dash.Dash(
     __name__, 
@@ -130,8 +130,7 @@ admin_layout = html.Div(
 
 @app.callback(
     [
-        Output('review', 'value'),
-        Output('company_link', 'href')
+        Output('review', 'value')
     ],
     [
         Input('submit_button', 'n_clicks_timestamp'),
@@ -150,7 +149,7 @@ admin_layout = html.Div(
         Output('progress', 'value'),
         Output('progress', 'color'),
         Output('rating', 'value'),
-        Output('submit_button', 'enable')
+        Output('submit_button')
     ],
     [Input('review', 'value')]
 )
@@ -191,10 +190,8 @@ def load_review_table(pathname):
                                      bordered=True,
                                      hover=True,
                                      responsive=True,
-                                     header=["id", "brand", "created_date", "review",
-                                             "rating", "suggested_rating", "sentiment_score"],
-                                     columns=["id", "brand", "created_date", "review",
-                                              "rating", "suggested_rating", "sentiment_score"]
+                                     header=["review", "rating", "suggested_rating", "sentiment_score"],
+                                     columns=["review", "rating", "suggested_rating", "sentiment_score"]
                                      )
 
     return table
